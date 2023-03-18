@@ -1,13 +1,28 @@
 ---
-import bg from './png/chating.gif'
+import bg from './png/chat.png'
+import bgLoading from './png/chatting.gif'
+
+import { eventEmitter } from  '../state/state' 
+let layoutStatus :boolean = false
+eventEmitter.on('update:layoutStatus', (status: boolean) => {
+  layoutStatus = status
+  console.log(status)
+});
 ---
-<div bg='#f86a87' min-h-screen>
+<div  min-h-screen>
   <div class="mh-blur">
-    <div flex >
-      <img  src={bg} alt="Blurred background image">
+    <div flex justify-end style="filter: grayscale(1);"  >
+  
+      <img  class="chat-img" display-none src={bg} h-screen alt="Blurred background image">
+      <img  class="chatting-img" display-none  src={bgLoading} h-screen alt="Blurred background image">
     </div>
   </div>
-  <div class="mh-content" min-h-screen dark:bg="#060000e6"  bg="#eee">
+  <div>{layoutStatus}</div>
+   <div fixed z-2  h-screen w-screen p-3 >
+    <div h-full w-full rounded-22px  class="drop" dark:bg="#15011dad" border   bg="#eee"> 
+    </div>
+  </div>
+  <div relative z-2  min-h-screen dark:bg="#15011dad"    bg="#eee"  >
     <slot />
   </div>
 </div>
@@ -19,12 +34,24 @@ import bg from './png/chating.gif'
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(5px);
+    /* filter: blur(10px); */
     z-index: 1;
+    
   }
-  .mh-content{
-      position: relative;
-      z-index: 2;
+  .drop {
+    backdrop-filter: blur(8px);
+  }
+  .app .chatting-img {
+      display : none;
+  }
+  .app .chat-img {
+      display : inline;
+  }
+  .app.chatting .chatting-img {
+      display : inline;
+  }
+  .app.chatting .chat-img {
+      display : none;
   }
 </style>
 

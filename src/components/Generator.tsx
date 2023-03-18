@@ -6,7 +6,6 @@ import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
 import type { ChatMessage, ErrorMessage } from '@/types'
-
 export default () => {
   let inputRef: HTMLTextAreaElement
   const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
@@ -64,6 +63,14 @@ export default () => {
 
   const requestWithLatestMessage = async() => {
     setLoading(true)
+    console.log('true')
+    var img = document.querySelector<HTMLImageElement>(".chatting-img");
+    var src = img.src;
+    img.src = "";
+    setTimeout(function() {
+      img.src = src;
+      document.body.classList.add('chatting')
+    }, 0);
     setCurrentAssistantMessage('')
     setCurrentError(null)
     const storagePassword = localStorage.getItem('pass')
@@ -139,6 +146,7 @@ export default () => {
       ])
       setCurrentAssistantMessage('')
       setLoading(false)
+      window.document.body.classList.remove('chatting')
       setController(null)
       inputRef.focus()
     }
