@@ -4,6 +4,7 @@ English | [简体中文](./README.zh-CN.md)
 
 A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/docs/guides/chat)
 
+forked from   : https://github.com/ddiu8081/chatgpt-demo/
 
 ## Contributing
 
